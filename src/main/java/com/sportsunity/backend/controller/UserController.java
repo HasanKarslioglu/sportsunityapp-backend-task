@@ -107,9 +107,11 @@ public class UserController {
         System.out.println(userIds.toString());
 
         for (Long id : userIds) {
+            user = userService.getUserById(id);
 
             List<Task> tasks = taskService.getTasksByUser(user);
             if (tasks.isEmpty()) {continue;}
+            System.out.println(tasks);
 
             List<TaskDTO> taskDTOs = tasks.stream()
                     .map(TaskDTO::new)

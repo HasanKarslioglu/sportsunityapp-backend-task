@@ -40,19 +40,37 @@ public class TaskController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getTask(@RequestParam("taskId") Long taskId) {
+    public ResponseEntity<?> getTask(@RequestParam("taskId") Long taskId, @RequestParam("userId") Long userId) {
         Task task = taskService.getTaskById(taskId);
+        User user = userService.getUserById(userId);
+
         if (task == null) {
             return ResponseEntity.status(404).body("Task not found.");
         }
+
+        if (!hasPermissionToAccessTask(user, task)) {
+            return ResponseEntity.status(403).body("Not have permission to access this task.");
+        }
+
         return ResponseEntity.ok(new TaskDTO(task));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteTask(@PathVariable("id") Long taskId, @RequestParam("userId") Long userId) {
         User user = userService.getUserById(userId);
+
+        Task task = taskService.getTaskById(taskId);
+
         if (user == null) {
             return ResponseEntity.status(404).body("User not found.");
+        }
+
+        if (task == null) {
+            return ResponseEntity.status(404).body("Task not found.");
+        }
+
+        if (!hasPermissionToAccessTask(user, task)) {
+            return ResponseEntity.status(403).body("Not have permission to delete this task.");
         }
 
         try {
@@ -62,4 +80,22 @@ public class TaskController {
             return ResponseEntity.status(403).body(e.getMessage());
         }
     }
+
+    private boolean hasPermissionToAccessTask(User user, Task task) {
+        if (user == null || task == null) {
+            return false;
+        }
+
+        switch (user.getRole()) {
+            case SUPER_USER:
+                return true;
+            case COMPANY_ADMIN:
+                return user.getCompany().equals(task.getUser().getCompany());
+            case STANDARD:
+                return user.getId().equals(task.getUser().getId());
+            default:
+                return false; // Unknown role, deny access
+        }
+    }
+
 }
