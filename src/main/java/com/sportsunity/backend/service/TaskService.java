@@ -93,7 +93,7 @@ public class TaskService {
 
     // Retrieve a task by its ID, throwing an EntityNotFoundException if not found
     public Task getTaskById(Long id) throws EntityNotFoundException {
-        return taskRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Task not found with id: " + id));
+        return taskRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Task not found with ID: " + id));
     }
 
     // Check if a user has permission to access a specific task

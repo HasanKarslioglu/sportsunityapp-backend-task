@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "7b19f0ed-1fb4-4aeb-86b2-59b793b0fc6d",
+		"name": "api/v1/company",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7191814",
+		"_collection_link": "https://www.postman.com/workspace/Test~24a45b3f-8352-44fc-beb1-086451181e30/collection/7191814-7b19f0ed-1fb4-4aeb-86b2-59b793b0fc6d?action=share&source=collection_link&creator=7191814"
+	},
+	"item": [
+		{
+			"name": "Create Company",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "Company1",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/companies",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Company With Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/companies/id/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"companies",
+						"id",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Company With Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/companies/name/Company1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"companies",
+						"name",
+						"Company1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Company With Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/companies/name/Company1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"companies",
+						"name",
+						"Company1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Company With Name",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/companies/id/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"companies",
+						"id",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

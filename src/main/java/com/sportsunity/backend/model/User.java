@@ -38,4 +38,5 @@ public class User {
     public Optional<Company> getCompany() {return Optional.ofNullable(company);}
     public void setCompany(Company company) {this.company = company;}
     public List<Task> getTasks() {return tasks;}
+    public void setId(Long id) {this.id = id;}
 }

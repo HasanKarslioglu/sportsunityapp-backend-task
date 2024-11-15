@@ -7,7 +7,6 @@ import com.sportsunity.backend.model.Task;
 import com.sportsunity.backend.model.User;
 import com.sportsunity.backend.model.UserRole;
 import com.sportsunity.backend.repository.UserRepository;
-import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -35,13 +34,13 @@ public class UserService {
     // Retrieve a user by ID
     public User getUserById(Long id) throws EntityNotFoundException {
         return userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + id));
     }
 
     // Delete a user by ID
     public void deleteUserById(Long id) {
         if (!userRepository.existsById(id)) {
-            throw new EntityNotFoundException("User not found with id: " + id);
+            throw new EntityNotFoundException("User not found with ID: " + id);
         }
         userRepository.deleteById(id);
     }
@@ -52,7 +51,7 @@ public class UserService {
         try {
             user = getUserById(userId);
         } catch (EntityNotFoundException e) {
-            throw new EntityNotFoundException("User not found with id: " + userId);
+            throw new EntityNotFoundException("User not found with ID: " + userId);
         }
 
         UserRole role = user.getRole();

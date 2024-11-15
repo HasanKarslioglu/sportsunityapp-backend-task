@@ -42,7 +42,7 @@ public class UserController {
             User user = userService.getUserById(userId);
             return ResponseEntity.ok(new UserDTO(user));
         } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(404).body("User not found with id: " + userId); // Handle case when user is not found
+            return ResponseEntity.status(404).body("User not found with ID: " + userId); // Handle case when user is not found
         }
     }
 
@@ -51,7 +51,7 @@ public class UserController {
     public ResponseEntity<?> deleteUserById(@PathVariable Long userId) {
         try {
             userService.deleteUserById(userId);
-            return ResponseEntity.status(204).body("User deleted successfully with id: " + userId);
+            return ResponseEntity.status(204).body("User deleted successfully with ID: " + userId);
         } catch (Exception e) {
             return ResponseEntity.status(404).body(e.getMessage()); // Handle case when user deletion fails
         }
