@@ -59,4 +59,21 @@ public class TaskController {
             return ResponseEntity.status(500).body("An unexpected error occurred: " + e.getMessage());
         }
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateTask(
+            @PathVariable("id") Long taskId,
+            @RequestParam("userId") Long userId,
+            @RequestBody String updatedDescription) {
+        try {
+            Task updatedTask = taskService.updateTask(taskId, userId, updatedDescription);
+            return ResponseEntity.ok(new TaskDTO(updatedTask));
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(404).body("Error: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(403).body("Permission Denied: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("An unexpected error occurred: " + e.getMessage());
+        }
+    }
 }

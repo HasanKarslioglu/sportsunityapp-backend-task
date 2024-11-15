@@ -114,4 +114,25 @@ public class TaskService {
         }
     }
 
+    public Task updateTask(Long taskId, Long userId, String updatedDescription) {
+
+        if (updatedDescription == null || updatedDescription.trim().isEmpty()) {
+            throw new IllegalArgumentException("Task description cannot be empty.");
+        }
+
+        Task task = taskRepository.findById(taskId).orElseThrow(() ->
+                new EntityNotFoundException("Task with ID " + taskId + " not found."));
+
+        User user = userService.getUserById(userId);
+
+        // Check permissions
+        if (!hasPermissionToAccessTask(user, task)) {
+            throw new IllegalArgumentException(
+                    "User with ID " + userId + " does not have permission to update task with ID " + taskId + ".");
+        }
+        task.setDescription(updatedDescription.trim());
+
+        // Save and return the updated task
+        return taskRepository.save(task);
+    }
 }

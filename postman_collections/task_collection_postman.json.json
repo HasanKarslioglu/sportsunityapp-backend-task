@@ -4,7 +4,7 @@
 		"name": "api/v1/task",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "7191814",
-		"_collection_link": "https://www.postman.com/workspace/Test~24a45b3f-8352-44fc-beb1-086451181e30/collection/7191814-109ed332-25a4-491e-ad92-88414199a5db?action=share&source=collection_link&creator=7191814"
+		"_collection_link": "https://www.postman.com/sonofcars/test/collection/1qk4u92/api-v1-task?action=share&source=collection_link&creator=7191814"
 	},
 	"item": [
 		{
@@ -102,6 +102,42 @@
 						"api",
 						"v1",
 						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Task",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "Updated task!",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/tasks/1?userId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"tasks",
+						"1"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1"
+						}
 					]
 				}
 			},
