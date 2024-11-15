@@ -1,8 +1,6 @@
 package com.sportsunity.backend.dto;
-import com.sportsunity.backend.model.Task;
-import com.sportsunity.backend.model.User;
 
-import java.util.List;
+import com.sportsunity.backend.model.Task;
 
 public class TaskDTO {
     private Long id;
@@ -12,19 +10,11 @@ public class TaskDTO {
     public TaskDTO(Task task) {
         this.id = task.getId();
         this.description = task.getDescription();
-        this.userId = task.getUser().getId();
+        // Handle possible null user (user might not be assigned to the task)
+        this.userId = task.getUser() != null ? task.getUser().getId() : null;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
+    public Long getId() {return id;}
+    public String getDescription() {return description;}
+    public Long getUserId() {return userId;}
 }
-

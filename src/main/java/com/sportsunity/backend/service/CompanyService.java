@@ -1,6 +1,5 @@
 package com.sportsunity.backend.service;
 
-import com.sportsunity.backend.dto.CompanyDTO;
 import com.sportsunity.backend.repository.CompanyRepository;
 import com.sportsunity.backend.model.Company;
 import jakarta.persistence.EntityNotFoundException;
@@ -13,8 +12,9 @@ public class CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
 
+    // Save a new Company with the given name.
+    // Throws IllegalArgumentException if a Company with the same name already exists.
     public Company saveCompany(String name) {
-        // Check if a company with the same name already exists
         companyRepository.findByName(name)
                 .ifPresent(existingCompany -> {
                     throw new IllegalArgumentException("Company with name '" + name + "' already exists.");
@@ -22,7 +22,6 @@ public class CompanyService {
 
         Company company = new Company();
         company.setName(name);
-        // Save the company if no duplicates are found
         return companyRepository.save(company);
     }
 

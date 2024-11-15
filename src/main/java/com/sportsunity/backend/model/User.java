@@ -18,9 +18,10 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "company_id")
-    @JsonBackReference
+    @JsonBackReference // Prevents circular references during JSON serialization.
     private Company company;
 
+    // A User can have multiple Tasks, but each Task is associated with one User.
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Task> tasks;
 
@@ -33,9 +34,7 @@ public class User {
     public UserRole getRole() {
         return UserRole.valueOf(role);
     }
-    public void setRole(UserRole role) {
-        this.role = role.toString();
-    }
+    public void setRole(UserRole role) {this.role = role.toString();}
     public Optional<Company> getCompany() {return Optional.ofNullable(company);}
     public void setCompany(Company company) {this.company = company;}
     public List<Task> getTasks() {return tasks;}
